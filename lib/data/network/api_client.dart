@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final dioProvider = Provider((ref) => Dio(BaseOptions(
-      baseUrl: 'http://localhost:5000/api',  
+      // baseUrl: 'http://localhost:5000/api',
+      baseUrl: 'https://hospital-billing-backend.onrender.com/api',
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       headers: {
@@ -13,7 +14,7 @@ final dioProvider = Provider((ref) => Dio(BaseOptions(
 
 final apiClientProvider = Provider((ref) {
   final dio = ref.watch(dioProvider);
-  
+
   dio.interceptors.add(InterceptorsWrapper(
     onRequest: (options, handler) async {
       final prefs = await SharedPreferences.getInstance();
@@ -24,6 +25,6 @@ final apiClientProvider = Provider((ref) {
       return handler.next(options);
     },
   ));
-  
+
   return dio;
 });
