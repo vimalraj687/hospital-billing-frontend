@@ -77,92 +77,150 @@ class _CreateBillDialogState extends ConsumerState<CreateBillDialog> {
     final isSubmitting = ref.watch(billingNotifierProvider);
 
     return AlertDialog(
-      title: Text('Create Bill for ${widget.patientName}'),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      title: Text('Create Bill for ${widget.patientName}', style: const TextStyle(fontWeight: FontWeight.bold)),
       content: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DropdownButtonFormField<String>(
-              value: _serviceType,
-              decoration: const InputDecoration(labelText: 'Service Type'),
-              items: const [
-                DropdownMenuItem(value: 'CONSULTATION', child: Text('Consultation')),
-                DropdownMenuItem(value: 'ROOM', child: Text('Room')),
-                DropdownMenuItem(value: 'LAB', child: Text('Lab Test')),
-                DropdownMenuItem(value: 'MEDICINE', child: Text('Medicine')),
-              ],
-              onChanged: (value) {
-                setState(() {
-                  if (value != null) _serviceType = value;
-                });
-              },
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _serviceNameController,
-              decoration: const InputDecoration(labelText: 'Service Name'),
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _servicePriceController,
-                    decoration: const InputDecoration(labelText: 'Unit Price'),
-                    keyboardType: TextInputType.number,
-                  ),
+        child: SizedBox(
+          width: 400,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DropdownButtonFormField<String>(
+                value: _serviceType,
+                decoration: InputDecoration(
+                  labelText: 'Service Type',
+                  prefixIcon: const Icon(Icons.medical_services_outlined),
+                  filled: true,
+                  fillColor: Colors.grey[50],
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: TextField(
-                    controller: _quantityController,
-                    decoration: const InputDecoration(labelText: 'Quantity'),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-              ],
-            ),
-            if (_serviceType == 'ROOM') ...[
-              const SizedBox(height: 8),
+                items: const [
+                  DropdownMenuItem(value: 'CONSULTATION', child: Text('Consultation')),
+                  DropdownMenuItem(value: 'ROOM', child: Text('Room')),
+                  DropdownMenuItem(value: 'LAB', child: Text('Lab Test')),
+                  DropdownMenuItem(value: 'MEDICINE', child: Text('Medicine')),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    if (value != null) _serviceType = value;
+                  });
+                },
+              ),
+              const SizedBox(height: 16),
               TextField(
-                controller: _daysController,
-                decoration: const InputDecoration(labelText: 'Number of Days'),
-                keyboardType: TextInputType.number,
+                controller: _serviceNameController,
+                decoration: InputDecoration(
+                  labelText: 'Service Name',
+                  prefixIcon: const Icon(Icons.description_outlined),
+                  filled: true,
+                  fillColor: Colors.grey[50],
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _servicePriceController,
+                      decoration: InputDecoration(
+                        labelText: 'Unit Price',
+                        prefixIcon: const Icon(Icons.attach_money_outlined),
+                        filled: true,
+                        fillColor: Colors.grey[50],
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: TextField(
+                      controller: _quantityController,
+                      decoration: InputDecoration(
+                        labelText: 'Quantity',
+                        prefixIcon: const Icon(Icons.numbers_outlined),
+                        filled: true,
+                        fillColor: Colors.grey[50],
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                ],
+              ),
+              if (_serviceType == 'ROOM') ...[
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _daysController,
+                  decoration: InputDecoration(
+                    labelText: 'Number of Days',
+                    prefixIcon: const Icon(Icons.calendar_today_outlined),
+                    filled: true,
+                    fillColor: Colors.grey[50],
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _discountController,
+                      decoration: InputDecoration(
+                        labelText: 'Discount',
+                        prefixIcon: const Icon(Icons.money_off_outlined),
+                        filled: true,
+                        fillColor: Colors.grey[50],
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: TextField(
+                      controller: _taxController,
+                      decoration: InputDecoration(
+                        labelText: 'Tax',
+                        prefixIcon: const Icon(Icons.account_balance_outlined),
+                        filled: true,
+                        fillColor: Colors.grey[50],
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                ],
               ),
             ],
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _discountController,
-                    decoration: const InputDecoration(labelText: 'Discount'),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: TextField(
-                    controller: _taxController,
-                    decoration: const InputDecoration(labelText: 'Tax'),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       actions: [
         TextButton(
           onPressed: isSubmitting ? null : () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
+          child: const Text('Cancel', style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         ElevatedButton(
           onPressed: isSubmitting ? null : _submit,
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
           child: isSubmitting 
-            ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)) 
-            : const Text('Create'),
+            ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)) 
+            : const Text('Create', style: TextStyle(fontWeight: FontWeight.bold)),
         ),
       ],
     );

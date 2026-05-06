@@ -59,35 +59,82 @@ class _UpdatePaymentDialogState extends ConsumerState<UpdatePaymentDialog> {
     final remaining = finalAmount - paidAmount;
 
     return AlertDialog(
-      title: const Text('Add Payment'),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      title: const Text('Add Payment', style: TextStyle(fontWeight: FontWeight.bold)),
       content: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Final Amount: \$${finalAmount.toStringAsFixed(2)}'),
-            Text('Already Paid: \$${paidAmount.toStringAsFixed(2)}'),
-            Text('Remaining: \$${remaining.toStringAsFixed(2)}', 
-              style: const TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _paidAmountController,
-              decoration: const InputDecoration(labelText: 'Amount to Pay Now'),
-              keyboardType: TextInputType.number,
-            ),
-          ],
+        child: SizedBox(
+          width: 400,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.blue.shade100),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Final Amount:', style: TextStyle(color: Colors.black87)),
+                        Text('\$${finalAmount.toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Already Paid:', style: TextStyle(color: Colors.black87)),
+                        Text('\$${paidAmount.toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+                      ],
+                    ),
+                    const Divider(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Remaining:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text('\$${remaining.toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.red)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+              TextField(
+                controller: _paidAmountController,
+                decoration: InputDecoration(
+                  labelText: 'Amount to Pay Now',
+                  prefixIcon: const Icon(Icons.payment_outlined),
+                  filled: true,
+                  fillColor: Colors.grey[50],
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey.shade300)),
+                ),
+                keyboardType: TextInputType.number,
+              ),
+            ],
+          ),
         ),
       ),
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       actions: [
         TextButton(
           onPressed: isSubmitting ? null : () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
+          child: const Text('Cancel', style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         ElevatedButton(
           onPressed: isSubmitting ? null : _submit,
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
           child: isSubmitting 
-            ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)) 
-            : const Text('Update'),
+            ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)) 
+            : const Text('Update Payment', style: TextStyle(fontWeight: FontWeight.bold)),
         ),
       ],
     );
