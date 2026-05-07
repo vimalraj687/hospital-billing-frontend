@@ -7,6 +7,7 @@ import '../../features/dashboard/presentation/dashboard_screen.dart';
 import '../../features/patients/presentation/patient_list_screen.dart';
 import '../../features/billing/presentation/bill_list_screen.dart';
 import '../../features/billing/presentation/bill_details_screen.dart';
+import '../../features/reports/presentation/reports_screen.dart';
 import '../../features/auth/providers/auth_provider.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -50,6 +51,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             },
           ),
         ],
+      ),
+      GoRoute(
+        path: '/reports',
+        builder: (context, state) => const ReportsScreen(),
       ),
     ],
   );

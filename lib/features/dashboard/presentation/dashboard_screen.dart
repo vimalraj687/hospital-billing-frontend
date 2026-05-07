@@ -267,6 +267,10 @@ class DashboardScreen extends ConsumerWidget {
                 context.go(
                   '/bills',
                 );
+              } else if (title == 'Reports') {
+                context.go(
+                  '/reports',
+                );
               }
             },
             child: Padding(
