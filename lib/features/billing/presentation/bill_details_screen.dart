@@ -137,7 +137,7 @@ class BillDetailsScreen extends StatelessWidget {
                             pw.SizedBox(height: 4),
 
                             pw.Text(
-                              'Professional Medical Invoice',
+                              'Medical Invoice',
                               style:
                                   const pw.TextStyle(
                                 color:
@@ -648,7 +648,7 @@ class BillDetailsScreen extends StatelessWidget {
                               ),
 
                               Text(
-                                'Professional Medical Invoice',
+                                'Medical Invoice',
                                 style:
                                     TextStyle(
                                   color: Colors

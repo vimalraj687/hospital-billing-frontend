@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 final dioProvider = Provider((ref) => Dio(BaseOptions(
       // baseUrl: 'http://localhost:5000/api',
       baseUrl: 'https://hospital-billing-backend.onrender.com/api',
-      connectTimeout: const Duration(seconds: 50),
-      receiveTimeout: const Duration(seconds: 50),
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
       headers: {
         'Content-Type': 'application/json',
       },

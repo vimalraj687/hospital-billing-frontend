@@ -11,7 +11,7 @@ class ReportsScreen extends StatelessWidget {
         title: const Text('Hospital Reports'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () => context.go('/dashboard'),
+          onPressed: () => context.go('/'),
         ),
       ),
       body: Container(
