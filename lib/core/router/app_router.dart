@@ -6,6 +6,7 @@ import '../../features/auth/presentation/register_screen.dart';
 import '../../features/dashboard/presentation/dashboard_screen.dart';
 import '../../features/patients/presentation/patient_list_screen.dart';
 import '../../features/billing/presentation/bill_list_screen.dart';
+import '../../features/billing/presentation/bill_details_screen.dart';
 import '../../features/auth/providers/auth_provider.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -40,6 +41,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/bills',
         builder: (context, state) => const BillListScreen(),
+        routes: [
+          GoRoute(
+            path: 'details',
+            builder: (context, state) {
+              final bill = state.extra as Map<String, dynamic>? ?? {};
+              return BillDetailsScreen(bill: bill);
+            },
+          ),
+        ],
       ),
     ],
   );
