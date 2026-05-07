@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../auth/providers/auth_provider.dart';
 
+// dashboard
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({
     super.key,
@@ -14,8 +15,7 @@ class DashboardScreen extends ConsumerWidget {
     BuildContext context,
     WidgetRef ref,
   ) {
-    final size =
-        MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     int crossAxisCount = 3;
 
@@ -26,111 +26,76 @@ class DashboardScreen extends ConsumerWidget {
     }
 
     return Scaffold(
-      backgroundColor:
-          const Color(0xfff4f7fb),
-
+      backgroundColor: const Color(0xfff4f7fb),
       appBar: AppBar(
-        backgroundColor:
-            Colors.white,
-
+        backgroundColor: Colors.white,
         elevation: 0,
-
         title: Row(
           children: [
             Container(
-              padding:
-                  const EdgeInsets.all(
+              padding: const EdgeInsets.all(
                 10,
               ),
-
               decoration: BoxDecoration(
-                gradient:
-                    LinearGradient(
+                gradient: LinearGradient(
                   colors: [
                     Colors.blue.shade700,
                     Colors.indigo.shade800,
                   ],
                 ),
-
-                borderRadius:
-                    BorderRadius.circular(
+                borderRadius: BorderRadius.circular(
                   14,
                 ),
               ),
-
               child: const Icon(
-                Icons
-                    .local_hospital_rounded,
-
+                Icons.local_hospital_rounded,
                 color: Colors.white,
                 size: 26,
               ),
             ),
-
             const SizedBox(width: 14),
-
             Text(
               'Hospital Dashboard',
-
               style: TextStyle(
                 color: Colors.grey[900],
-
-                fontWeight:
-                    FontWeight.bold,
-
+                fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),
             ),
           ],
         ),
-
         actions: [
           Padding(
-            padding:
-                const EdgeInsets.only(
+            padding: const EdgeInsets.only(
               right: 20,
             ),
-
             child: TextButton.icon(
               icon: const Icon(
                 Icons.logout,
                 color: Colors.redAccent,
               ),
-
               label: const Text(
                 'Logout',
-
                 style: TextStyle(
-                  color:
-                      Colors.redAccent,
-
-                  fontWeight:
-                      FontWeight.bold,
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-
-              style:
-                  TextButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 18,
                   vertical: 12,
                 ),
-
-                shape:
-                    RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
                     14,
                   ),
                 ),
               ),
-
               onPressed: () {
                 ref
                     .read(
-                      authProvider
-                          .notifier,
+                      authProvider.notifier,
                     )
                     .logout();
               },
@@ -138,69 +103,45 @@ class DashboardScreen extends ConsumerWidget {
           ),
         ],
       ),
-
       body: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
-
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // HERO SECTION
           Container(
             width: double.infinity,
-
-            padding:
-                const EdgeInsets.all(
+            padding: const EdgeInsets.all(
               40,
             ),
-
             decoration: BoxDecoration(
-              gradient:
-                  LinearGradient(
+              gradient: LinearGradient(
                 colors: [
                   Colors.blue.shade800,
                   Colors.indigo.shade900,
                 ],
-
-                begin:
-                    Alignment.topLeft,
-
-                end: Alignment
-                    .bottomRight,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
             ),
-
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment
-                      .start,
-
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   'Welcome Back!',
-
                   style: TextStyle(
                     color: Colors.white,
-
                     fontSize: 38,
-
-                    fontWeight:
-                        FontWeight.bold,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-
                 const SizedBox(
                   height: 10,
                 ),
-
                 Text(
                   'Manage patients, billing, reports and hospital operations easily.',
-
                   style: TextStyle(
-                    color: Colors.white
-                        .withOpacity(
+                    color: Colors.white.withOpacity(
                       0.85,
                     ),
-
                     fontSize: 18,
                   ),
                 ),
@@ -211,63 +152,34 @@ class DashboardScreen extends ConsumerWidget {
           // DASHBOARD CARDS
           Expanded(
             child: Padding(
-              padding:
-                  const EdgeInsets.all(
+              padding: const EdgeInsets.all(
                 32,
               ),
-
               child: GridView.count(
-                crossAxisCount:
-                    crossAxisCount,
-
+                crossAxisCount: crossAxisCount,
                 crossAxisSpacing: 24,
                 mainAxisSpacing: 24,
-
-                childAspectRatio:
-                    size.width < 600
-                        ? 2.0
-                        : 1.15,
-
+                childAspectRatio: size.width < 600 ? 2.0 : 1.15,
                 children: [
                   _buildCard(
                     context: context,
-
                     title: 'Patients',
-
-                    subtitle:
-                        'Manage patient records and profiles',
-
-                    icon:
-                        Icons.people_outline,
-
+                    subtitle: 'Manage patient records and profiles',
+                    icon: Icons.people_outline,
                     color: Colors.blue,
                   ),
-
                   _buildCard(
                     context: context,
-
                     title: 'Billing',
-
-                    subtitle:
-                        'Invoices, payments and transactions',
-
-                    icon: Icons
-                        .receipt_long_outlined,
-
+                    subtitle: 'Invoices, payments and transactions',
+                    icon: Icons.receipt_long_outlined,
                     color: Colors.green,
                   ),
-
                   _buildCard(
                     context: context,
-
                     title: 'Reports',
-
-                    subtitle:
-                        'Analytics and hospital insights',
-
-                    icon:
-                        Icons.bar_chart_outlined,
-
+                    subtitle: 'Analytics and hospital insights',
+                    icon: Icons.bar_chart_outlined,
                     color: Colors.orange,
                   ),
                 ],
@@ -287,20 +199,15 @@ class DashboardScreen extends ConsumerWidget {
     required MaterialColor color,
   }) {
     return MouseRegion(
-      cursor:
-          SystemMouseCursors.click,
-
+      cursor: SystemMouseCursors.click,
       child: AnimatedContainer(
         duration: const Duration(
           milliseconds: 250,
         ),
-
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end:
-                Alignment.bottomRight,
-
+            end: Alignment.bottomRight,
             colors: [
               Colors.white,
               color.shade50.withOpacity(
@@ -308,202 +215,131 @@ class DashboardScreen extends ConsumerWidget {
               ),
             ],
           ),
-
-          borderRadius:
-              BorderRadius.circular(
+          borderRadius: BorderRadius.circular(
             30,
           ),
-
           border: Border.all(
             color: color.shade100,
             width: 1.2,
           ),
-
           boxShadow: [
             BoxShadow(
-              color:
-                  color.withOpacity(
+              color: color.withOpacity(
                 0.08,
               ),
-
               blurRadius: 24,
               spreadRadius: 1,
-
-              offset:
-                  const Offset(
+              offset: const Offset(
                 0,
                 10,
               ),
             ),
-
             BoxShadow(
-              color:
-                  Colors.white.withOpacity(
+              color: Colors.white.withOpacity(
                 0.9,
               ),
-
               blurRadius: 10,
-
-              offset:
-                  const Offset(
+              offset: const Offset(
                 -4,
                 -4,
               ),
             ),
           ],
         ),
-
         child: Material(
           color: Colors.transparent,
-
           child: InkWell(
-            borderRadius:
-                BorderRadius.circular(
+            borderRadius: BorderRadius.circular(
               30,
             ),
-
-            splashColor:
-                color.withOpacity(
+            splashColor: color.withOpacity(
               0.08,
             ),
-
-            hoverColor:
-                color.withOpacity(
+            hoverColor: color.withOpacity(
               0.04,
             ),
-
             onTap: () {
-              if (title ==
-                  'Patients') {
+              if (title == 'Patients') {
                 context.go(
                   '/patients',
                 );
-              } else if (title ==
-                  'Billing') {
+              } else if (title == 'Billing') {
                 context.go(
                   '/bills',
                 );
               }
             },
-
             child: Padding(
-              padding:
-                  const EdgeInsets.all(
+              padding: const EdgeInsets.all(
                 28,
               ),
-
               child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment
-                        .start,
-
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // TOP SECTION
                   Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
-
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding:
-                            const EdgeInsets
-                                .all(
+                        padding: const EdgeInsets.all(
                           18,
                         ),
-
-                        decoration:
-                            BoxDecoration(
-                          gradient:
-                              LinearGradient(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
                             colors: [
                               color.shade400,
                               color.shade700,
                             ],
                           ),
-
-                          borderRadius:
-                              BorderRadius
-                                  .circular(
+                          borderRadius: BorderRadius.circular(
                             22,
                           ),
-
                           boxShadow: [
                             BoxShadow(
-                              color: color
-                                  .withOpacity(
+                              color: color.withOpacity(
                                 0.25,
                               ),
-
-                              blurRadius:
-                                  18,
-
-                              offset:
-                                  const Offset(
+                              blurRadius: 18,
+                              offset: const Offset(
                                 0,
                                 8,
                               ),
                             ),
                           ],
                         ),
-
                         child: Icon(
                           icon,
-
                           size: 42,
-
-                          color:
-                              Colors.white,
+                          color: Colors.white,
                         ),
                       ),
-
                       Container(
-                        padding:
-                            const EdgeInsets.symmetric(
-                          horizontal:
-                              14,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
                           vertical: 8,
                         ),
-
-                        decoration:
-                            BoxDecoration(
-                          color:
-                              color.shade50,
-
-                          borderRadius:
-                              BorderRadius.circular(
+                        decoration: BoxDecoration(
+                          color: color.shade50,
+                          borderRadius: BorderRadius.circular(
                             30,
                           ),
                         ),
-
                         child: Row(
                           children: [
                             Text(
                               'Open',
-
-                              style:
-                                  TextStyle(
-                                color:
-                                    color.shade700,
-
-                                fontWeight:
-                                    FontWeight
-                                        .w600,
+                              style: TextStyle(
+                                color: color.shade700,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-
                             const SizedBox(
                               width: 6,
                             ),
-
                             Icon(
-                              Icons
-                                  .arrow_forward_rounded,
-
+                              Icons.arrow_forward_rounded,
                               size: 18,
-
-                              color:
-                                  color.shade700,
+                              color: color.shade700,
                             ),
                           ],
                         ),
@@ -516,20 +352,11 @@ class DashboardScreen extends ConsumerWidget {
                   // TITLE
                   Text(
                     title,
-
                     style: TextStyle(
                       fontSize: 28,
-
-                      fontWeight:
-                          FontWeight
-                              .bold,
-
-                      letterSpacing:
-                          0.2,
-
-                      color:
-                          Colors.grey[
-                              900],
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.2,
+                      color: Colors.grey[900],
                     ),
                   ),
 
@@ -540,15 +367,10 @@ class DashboardScreen extends ConsumerWidget {
                   // SUBTITLE
                   Text(
                     subtitle,
-
                     style: TextStyle(
                       fontSize: 15,
-
                       height: 1.5,
-
-                      color:
-                          Colors.grey[
-                              600],
+                      color: Colors.grey[600],
                     ),
                   ),
 
@@ -558,56 +380,33 @@ class DashboardScreen extends ConsumerWidget {
 
                   // BOTTOM BAR
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 18,
                       vertical: 14,
                     ),
-
-                    decoration:
-                        BoxDecoration(
-                      color: Colors
-                          .grey
-                          .shade50,
-
-                      borderRadius:
-                          BorderRadius.circular(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade50,
+                      borderRadius: BorderRadius.circular(
                         18,
                       ),
                     ),
-
                     child: Row(
                       children: [
                         Icon(
-                          Icons
-                              .verified_user_outlined,
-
+                          Icons.verified_user_outlined,
                           size: 18,
-
-                          color:
-                              color.shade700,
+                          color: color.shade700,
                         ),
-
                         const SizedBox(
                           width: 10,
                         ),
-
                         Expanded(
                           child: Text(
                             'Secure hospital management system',
-
-                            style:
-                                TextStyle(
-                              color:
-                                  Colors.grey[
-                                      700],
-
-                              fontSize:
-                                  13,
-
-                              fontWeight:
-                                  FontWeight
-                                      .w500,
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
