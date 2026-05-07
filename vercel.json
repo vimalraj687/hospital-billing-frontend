@@ -1,11 +1,12 @@
 {
-  "buildCommand": "flutter build web",
+  "version": 2,
+  "buildCommand": "export PATH=\"$PATH:/vercel/path0/flutter/bin\" && flutter build web",
   "outputDirectory": "build/web",
-  "installCommand": "git clone https://github.com/flutter/flutter.git --depth 1 -b stable /tmp/flutter && /tmp/flutter/bin/flutter doctor && /tmp/flutter/bin/flutter pub get",
+  "installCommand": "git clone https://github.com/flutter/flutter.git /vercel/path0/flutter --depth 1 -b stable && export PATH=\"$PATH:/vercel/path0/flutter/bin\" && flutter doctor && flutter pub get",
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/index.html"
     }
   ]
 }
